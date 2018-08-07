@@ -1,0 +1,101 @@
+#%RAML 1.0
+baseUri: https://mocksvc.mulesoft.com/mocks/578ba3d4-5743-4448-893b-3b11f1f05a86/globalweather/v1 # baseUri: /globalweather/v1
+title: weather_app
+version: 1.0
+
+/cities:
+  get:
+    description: Retrieve all supported cities for a specific country
+    queryParameters: 
+      country:
+        type: string
+        description: Country name whose cities are requested
+        example: Australia
+        required: true
+    responses: 
+      200:
+        body: 
+          application/json:
+            example: |
+               {[{"country":"Australia","cities":["Perth","Melbourne"]}]}
+      400:
+        body: 
+          application/json:
+            example: |
+               {"message":"Bad Request"}
+      401:
+        body: 
+          application/json:
+            example: |
+               {"message": "Unauthorised"}
+      403:
+        body: 
+          application/json:
+            example: |
+               {"message": "Forbidden"}               
+      404:
+        body: 
+          application/json:
+            example: |
+               {"message": "Resource not found"}
+      500:
+        body: 
+          application/json:
+            example: |
+               {"message": "Internal Server Error"}
+      503:
+        body: 
+          application/json:
+            example: |
+               {"message": "Service Unavailable"}                                                     
+
+/weather:
+  get:
+    description: Retrieve current weather information for a specified city in a specified country
+    queryParameters: 
+      country:
+        type: string
+        description: Country name
+        example: Australia
+        required: true
+      city:
+        type: string
+        description: City name within the specified country
+        example: Melbourne
+        required: true
+    responses: 
+      200:
+        body: 
+          application/json:
+            example: |
+               {"location":"Melbourne","time":"11 AM","wind":"15 km per hour","visibility":"10 km","skyConditions":"sunny","temperature":"18","dewPoint":"2 C","relativeHumidity":"35","status":"Normal"}
+      400:
+        body: 
+          application/json:
+            example: |
+               {"message":"Bad Request"}
+      401:
+        body: 
+          application/json:
+            example: |
+               {"message": "Unauthorised"}
+      403:
+        body: 
+          application/json:
+            example: |
+               {"message": "Forbidden"}               
+      404:
+        body: 
+          application/json:
+            example: |
+               {"message": "Resource not found"}
+      500:
+        body: 
+          application/json:
+            example: |
+               {"message": "Internal Server Error"}
+      503:
+        body: 
+          application/json:
+            example: |
+               {"message": "Service Unavailable"}                                     
